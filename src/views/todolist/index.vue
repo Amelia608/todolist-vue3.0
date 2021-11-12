@@ -8,7 +8,17 @@
 
 <script>
 // @ is an alias to /src
-import { defineComponent, ref, computed } from 'vue'
+import {
+  defineComponent,
+  ref,
+  computed,
+  onBeforeMount,
+  onMounted,
+  onBeforeUpdate,
+  onUpdated,
+  onBeforeUnmount,
+  onUnmounted,
+} from 'vue'
 import { ElNotification } from 'element-plus'
 
 import { useStore } from 'vuex'
@@ -46,6 +56,7 @@ export default defineComponent({
           })
           return
         }
+
         //调用mutation里面的方法
         store.commit('addTodo', {
           title: value.value,
@@ -61,7 +72,29 @@ export default defineComponent({
       clear = () => {
         let arr = list.value.filter(el => !el.complete)
         store.commit('clear', arr);
-      }
+      };
+    onBeforeMount(() => {
+      console.log('父组件onBeforeMount')
+    })
+    onMounted(() => {
+      console.log('父组件onMounted')
+    })
+    onBeforeUpdate(() => {
+      console.log('父组件onBeforeUpdate')
+    })
+    onUpdated(() => {
+      console.log('父组件onUpdated')
+    })
+    onBeforeUnmount(() => {
+      console.log('父组件onBeforeUnmount')
+    })
+    onUnmounted(() => {
+      console.log('父组件onUnmounted')
+    })
+    // // onBeforeUpdate,
+    //   onUpdated,
+    //   onBeforeUnmount,
+    //   onUnmounted,
 
     return {
       value,
